@@ -8,6 +8,7 @@ import { postData } from '../../commonHelpers/api';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import apiEndpoints from '../../commonHelpers/apiEndpoints';
 
 export default function EmailLogin () {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function EmailLogin () {
             console.log('Form submitted with:', { email, password, tnc });
             setLoading(true);
             try {
-                const response = await postData('/auth/login', { 'email': email, 'password': password });
+                const response = await postData(apiEndpoints.login, { 'email': email, 'password': password });
                 setResponseData(response); 
                 navigate('/dashboard', { replace: true });
                 window.localStorage.setItem(process.env.REACT_APP_tokenKey, response.data.token);

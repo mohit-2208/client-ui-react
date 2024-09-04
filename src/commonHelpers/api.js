@@ -1,21 +1,6 @@
 import axios from "axios";
 import config from "../config";
-
-// export const useGetData = () => {
-//   const axiosInstance = handleAxiosInstance();
-
-//   const getData = async (endpoint) => {
-//     try {
-//       const response = await axiosInstance.get(endpoint);
-//       return response.data;
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//       throw error;
-//     }
-//   };
-
-//   return getData;
-// };
+import {appendTimestampToUrl} from '../commonHelpers/utils';
 
 const axiosInstance = axios.create({
   baseURL: config.apiEndpoint,
@@ -40,7 +25,7 @@ axiosInstance.interceptors.request.use(
 
 export const getData = async (endpoint, options = {}) => {
   try {
-    const response = await axiosInstance.get(endpoint, { params: options });
+    const response = await axiosInstance.get(appendTimestampToUrl(endpoint), { params: options });
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -50,7 +35,7 @@ export const getData = async (endpoint, options = {}) => {
 
 export const postData = async (endpoint, data) => {
   try {
-    const response = await axiosInstance.post(endpoint, data);
+    const response = await axiosInstance.post(appendTimestampToUrl(endpoint), data);
     return response.data;
   } catch (error) {
     console.error("Error posting data:", error);

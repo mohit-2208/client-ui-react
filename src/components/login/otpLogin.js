@@ -8,6 +8,7 @@ import OTPForm from '../../shared/otp/index';
 import { getData, postData } from '../../commonHelpers/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import apiEndpoints from '../../commonHelpers/apiEndpoints';
 
 export default function OTPLogin () {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function OTPLogin () {
             setErrors({ mobile: '', otp: '' });
             setLoading(true);
             try {
-                const response = await getData('/auth/otp/'+mobile);
+                const response = await getData(apiEndpoints.generateOTP.replace(':phone',mobile));
                 // console.log(response)
                 setOtpSent(true);
                 setDisabled(true);
@@ -53,7 +54,7 @@ export default function OTPLogin () {
             console.log('Form Submitted: ', {mobile, otp})
             setLoading(true);
             try {
-                const response = await postData('/auth/otp_login', { 'phone': mobile, 'otp': otp });
+                const response = await postData(apiEndpoints.otp_login, { 'phone': mobile, 'otp': otp });
                 setResponseData(response); 
                 navigate('/dashboard', { replace: true });
                 window.localStorage.setItem(process.env.REACT_APP_tokenKey, response.data.token);

@@ -6,6 +6,7 @@ import { validateEmail } from '../../commonHelpers/formValidation';
 import { postData } from '../../commonHelpers/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import apiEndpoints from '../../commonHelpers/apiEndpoints';
 
 export default function ForgotPassword () {
     const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ export default function ForgotPassword () {
             console.log('Form submitted with:', { email });
             setLoading(true);
             try {
-                const response = await postData('/auth/forgotpassword', { 'email': email });
+                const response = await postData(apiEndpoints.forgotpassword, { 'email': email });
                 setResponseData(response); 
                 setEmailSent(true);
             } catch (error) {

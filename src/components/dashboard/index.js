@@ -4,6 +4,7 @@ import { getData } from '../../commonHelpers/api';
 import Sidebar from '../../shared/sideBar';
 import { dateFormatter } from '../../commonHelpers/utils.js';
 import Notifications from './notifications';
+import apiEndpoints from '../../commonHelpers/apiEndpoints.js';
 
 const LoanListItem = ({ item }) => (
     <li className="border border-slate-200 p-5 rounded-lg shadow-md cursor-pointer mb-4">
@@ -38,9 +39,9 @@ const Dashboard = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await getData('/loan-requests', {
-                    start: 0,
+                const response = await getData(apiEndpoints.loan_requests, {
                     count: 100,
+                    start: 0,
                 });
                 setResponseData(response);
             } catch (error) {

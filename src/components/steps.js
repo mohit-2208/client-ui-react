@@ -5,19 +5,38 @@ import { getStepsData } from '../redux/actions/stepActions';
 import Loader from '../shared/loader/loader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import apiEndpoints from '../commonHelpers/apiEndpoints';
+import { getData } from '../commonHelpers/api';
 
 function StepSwitcher() {
     const [step, setStep] = useState(null);
+    const [meData, setMeData] = useState(null);
     const dispatch = useDispatch();
     const { data, loading, error } = useSelector((state) => state.getStepsReducer);
 
     useEffect(() => {
-        dispatch(getStepsData('/customer-loan-application/236993de-9042-42a1-af9a-bf17cea32f12?timestamp=1723639466636'));
+        dispatch(getStepsData('/customer-loan-application/f6ea54ef-f72d-4fc7-9320-8e1e03689763'));
     }, [dispatch]);
 
     useEffect(() => {
         setStep(data?.data?.step);
     }, [data])
+
+    // useEffect(() => {
+    //     dispatch(getStepsData(apiEndpoints.me));
+    // }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getData(apiEndpoints.me);
+                setMeData(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {}
+        };
+        fetchData();
+    }, []);
 
     const renderComponent = () => {
         switch (data?.data?.step) {

@@ -4,3 +4,13 @@ export const dateFormatter = (dateString) => {
     const formattedDate = `${months[dateObject.getMonth()]} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
     return formattedDate;
 };
+
+export const appendTimestampToUrl = (url) => {
+	if (url === null) {
+		return ""
+	} else if (url.includes('?')) {
+		return url + "&timestamp=" + Date.now()
+	} else {
+		return url + "?timestamp=" + Date.now()
+	}
+}
