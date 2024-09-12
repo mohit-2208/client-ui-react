@@ -4,6 +4,7 @@ import Login from './components/login';
 import CustomerLogin from './components/customer-login';
 import StepSwitcher from "./components/steps";
 import Dashboard from "./components/dashboard";
+import ApplicationWorkFlow from "./components/application-workflow";
 
 const RouterApp = () => {
     return (
@@ -21,7 +22,11 @@ const RouterApp = () => {
 
             <Route path="/customer-login" element={<CustomerLogin />} />
 
-            <Route path="v2/instant-loan/application" element={<StepSwitcher />} />
+            <Route path="/v2/instant-loan/application" element={<StepSwitcher />} />
+
+            <Route 
+                path="/instant-loan/application/:applicationId" element={<ApplicationWorkFlow />} 
+            />
 
             {/* 404 */}
             {/* <Route path="*" element={<Navigate to='/index' />} /> */}

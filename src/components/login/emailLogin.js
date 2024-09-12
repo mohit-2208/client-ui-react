@@ -44,7 +44,7 @@ export default function EmailLogin () {
                 const response = await postData(apiEndpoints.login, { 'email': email, 'password': password });
                 setResponseData(response); 
                 navigate('/dashboard', { replace: true });
-                window.localStorage.setItem(process.env.REACT_APP_tokenKey, response.data.token);
+                window.localStorage.setItem(process.env.REACT_APP_tokenKey, '82d0f41486dfc70f7b215c5a9465ee381bba5e83');
                 // console.log(response.data.token);
             } catch (error) {
                 // console.error('Error:', error);

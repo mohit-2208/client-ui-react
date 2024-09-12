@@ -2,27 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getData } from '../../commonHelpers/api'; 
 import Sidebar from '../../shared/sideBar';
-import { dateFormatter } from '../../commonHelpers/utils.js';
 import Notifications from './notifications';
 import apiEndpoints from '../../commonHelpers/apiEndpoints.js';
+import LoanDetails from './loan-detail.js';
 
-const LoanListItem = ({ item }) => (
-    <li className="border border-slate-200 p-5 rounded-lg shadow-md cursor-pointer mb-4">
-        <h3 className="flex justify-between border-b-[1px] text-gray-600 pb-2 border-slate-200">
-            Loan Application <span className="text-base">IND{item.application.request_id}</span>
-        </h3>
-        <div className="flex justify-between pt-3">
-            <div>
-                <span className="block">{item.borrower.name}</span>
-                <span className="text-sm text-slate-500">Applied on: {dateFormatter(item.application.created)}</span>
-            </div>
-            <div>
-                <span className="block text-center text-xl text-[#4a6eb0]">{item.application.amount || item.application.applied_amount}</span>
-                <span className="text-sm text-slate-500">{item.application.state === 'rejected' ? 'Application Rejected' : 'Loan Requested'}</span>
-            </div>
-        </div>
-    </li>
-);
+const LoanListItem = ({ item }) => {
+    console.log(item)
+    return (
+        <LoanDetails item={item} />
+    );
+};
+
 
 const Dashboard = () => {
     const navigate = useNavigate();
