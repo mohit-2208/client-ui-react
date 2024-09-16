@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TextFields from '../../shared/form/textField';
 import Checkboxes from '../../shared/form/checkbox';
 import { Link } from "react-router-dom";
@@ -9,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import apiEndpoints from '../../commonHelpers/apiEndpoints';
+import { getUserData } from '../../redux/actions/UserDetailsActions';
 
 export default function EmailLogin () {
     const navigate = useNavigate();
@@ -18,6 +20,8 @@ export default function EmailLogin () {
     const [tnc, setTnc] = useState(false);
     const [errors, setErrors] = useState({ email: '', password: '', tnc: '' });
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const userDetails = useSelector((state) => state.getUserDetailsReducer);
 
     const linkRedirect = () => {}
 
@@ -44,10 +48,10 @@ export default function EmailLogin () {
                 const response = await postData(apiEndpoints.login, { 'email': email, 'password': password });
                 setResponseData(response); 
                 navigate('/dashboard', { replace: true });
-                window.localStorage.setItem(process.env.REACT_APP_tokenKey, '82d0f41486dfc70f7b215c5a9465ee381bba5e83');
+                window.localStorage.setItem(process.env.REACT_APP_tokenKey, response.data.token);
                 // console.log(response.data.token);
+                dispatch(getUserData({ email, password }));
             } catch (error) {
-                // console.error('Error:', error);
                 if (error?.response?.data?.data?.inner?.errorCode) {
                     if (error.response.data.data.inner.errorCode === "ACCOUNT_LOCKED") {
                         toast.error(error.response.data.data.message, { autoClose: false });

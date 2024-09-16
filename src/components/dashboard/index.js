@@ -5,9 +5,9 @@ import Sidebar from '../../shared/sideBar';
 import Notifications from './notifications';
 import apiEndpoints from '../../commonHelpers/apiEndpoints.js';
 import LoanDetails from './loan-detail.js';
+import { useSelector } from 'react-redux';
 
 const LoanListItem = ({ item }) => {
-    console.log(item)
     return (
         <LoanDetails item={item} />
     );
@@ -18,6 +18,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [responseData, setResponseData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const userInfo = useSelector((state) => state.getUserDetailsReducer.userInfo);
 
     useEffect(() => {
         if (!localStorage.getItem("invoice_discounting_token")) {
