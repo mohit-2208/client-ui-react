@@ -12,19 +12,15 @@ function StepSwitcher() {
     const [step, setStep] = useState(null);
     const [meData, setMeData] = useState(null);
     const dispatch = useDispatch();
-    const { data, loading, error } = useSelector((state) => state.getStepsReducer);
+    const { data, loading, error, currentStep } = useSelector((state) => state.getStepsReducer);
 
     useEffect(() => {
-        dispatch(getStepsData('/customer-loan-application/f6ea54ef-f72d-4fc7-9320-8e1e03689763'));
+        dispatch(getStepsData('/customer-loan-application/f6ea54ef-f72d-4fc7-9320-8e1e03689763', step));
     }, [dispatch]);
 
     useEffect(() => {
         setStep(data?.data?.step);
     }, [data])
-
-    // useEffect(() => {
-    //     dispatch(getStepsData(apiEndpoints.me));
-    // }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,7 +55,7 @@ function StepSwitcher() {
             </header>
             <div className="container mx-auto max-w-[960px] flex justify-between items-center py-5 pl-6 pr-6">
                 <h2 className="text-[18px] font-semibold">{data?.data?.stepsMeta[step]?.label}</h2>
-                <div className="text-[15px]">Your Information is <span className="text-green">100% Secure</span></div>
+                <div className="text-[15px]">Your Information is <span className="text-green">100% Secure {currentStep}</span></div>
             </div>
             {loading ? <Loader /> : error ? <ToastContainer /> : renderComponent()}
         </>

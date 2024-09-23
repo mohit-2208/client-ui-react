@@ -13,7 +13,6 @@ const LoanListItem = ({ item }) => {
     );
 };
 
-
 const Dashboard = () => {
     const navigate = useNavigate();
     const [responseData, setResponseData] = useState(null);

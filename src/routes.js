@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from './components/login';
 import CustomerLogin from './components/customer-login';
 import StepSwitcher from "./components/steps";
@@ -28,8 +28,8 @@ const RouterApp = () => {
                 path="/instant-loan/application/:applicationId" element={<ApplicationWorkFlow />} 
             />
 
-            {/* 404 */}
-            {/* <Route path="*" element={<Navigate to='/index' />} /> */}
+            {/* Redirect to Login by default after npm started */}
+            <Route path="*" element={<Navigate to='/login' />} />
         </Routes>
     );
 };

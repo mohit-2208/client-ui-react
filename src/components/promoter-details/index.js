@@ -20,9 +20,10 @@ function PromoterDetails (props) {
             [key]: e.target.value,
         }));
     };
-
     const nextDetailHandler = () => {
-        dispatch(updateStep('promotersInformation'));
+        if(step === 'prePromotersInformation') {
+            dispatch(updateStep('promotersInformation'));
+        }
     }
 
     return (
