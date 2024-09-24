@@ -27,7 +27,7 @@ function PromoterDetails (props) {
     }
 
     return (
-        <div className="bg-white p-4">
+        <div className="bg-white px-4 pt-0 pb-4 md:p-4 xs:max-md:pb-28">
             <div className="container mx-auto max-w-[960px]">
                 <div className="flex flex-wrap">
                     {
@@ -36,7 +36,7 @@ function PromoterDetails (props) {
                             .sort((a, b) => a[1].order - b[1].order)
                             .map(([key, item]) => {
                             return (
-                                <div className="flex-[50%_50%_0%] pl-6 pr-6" key={key}>
+                                <div className="flex-[0_100%] md:flex-[50%_50%_0%] p-0 md:pl-6 md:pr-6" key={key}>
                                     {
                                         item.type === "chip_buttons" ?
                                         <div className="form-group mt-7 relative">
@@ -72,8 +72,8 @@ function PromoterDetails (props) {
                             );
                         })
                     }
-                    <div className="flex-[100%_0%] pl-6 pr-6 mt-10">
-                        <Buttons label={data?.stepsMeta[step]?.nextButtonLabel} disabled="" variant="secondary" type="button" id="next-step" className="w-[200px] font-semibold text-md" clickHandler={nextDetailHandler} />
+                    <div className="flex-[100%_0%] mt-10 pl-0 md:pl-6 xs:max-md:fixed xs:max-md:bottom-0 xs:max-md:left-0 xs:max-md:right-0 xs:max-md:bg-white xs:max-md:mt-0 xs:max-md:text-center xs:max-md:p-5 xs:max-md:shadow-gray-400 xs:max-md:shadow">
+                        <Buttons label={data?.stepsMeta[step]?.nextButtonLabel} disabled="" variant="secondary" type="button" id="next-step" className="w-[200px] font-semibold text-md xs:max-md:w-full" clickHandler={nextDetailHandler} />
                     </div>
                 </div>
             </div>
