@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import apiEndpoints from '../commonHelpers/apiEndpoints';
 import { getData } from '../commonHelpers/api';
 import BorrowerDetails from './borrower-details';
+import LogoIcon from '../assets/icons/logo';
 
 function StepSwitcher() {
     const [step, setStep] = useState(null);
@@ -51,12 +52,16 @@ function StepSwitcher() {
 
     return (
         <>
-            <header className="bg-white py-5 pl-6 pr-6">
-                <div className="container mx-auto max-w-[960px]">{currentStep}</div>
+            <header className="bg-white">
+                <div className="container mx-auto max-w-[960px] p-4 md:py-6 xs:max-md:text-center">
+                    <LogoIcon />
+                </div>
             </header>
-            <div className="container mx-auto max-w-[960px] flex-none md:flex justify-between items-center p-4 md:pl-6 md:pr-6 md:py-5">
-                <h2 className="text-[18px] font-semibold">{data?.data?.stepsMeta[step]?.label}</h2>
-                <div className="text-[11px] md:text-[15px]">Your Information is <span className="text-green">100% Secure</span></div>
+            <div className="bg-[#F7F9FD] shadow shadow-gray-400">
+                <div className="container mx-auto max-w-[960px] flex-none md:flex justify-between items-center p-4 md:p-6">
+                    <h2 className="text-[16px] font-semibold md:text-[18px]">{data?.data?.stepsMeta[step]?.label}</h2>
+                    <div className="text-[11px] md:text-[15px]">Your Information is <span className="text-green">100% Secure</span></div>
+                </div>
             </div>
             {loading ? <Loader /> : error ? <ToastContainer /> : renderComponent()}
         </>
