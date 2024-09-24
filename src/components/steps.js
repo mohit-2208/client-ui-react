@@ -17,7 +17,7 @@ function StepSwitcher() {
     const { data, loading, error, currentStep } = useSelector((state) => state.getStepsReducer);
 
     useEffect(() => {
-        dispatch(getStepsData('/customer-loan-application/26b68b7f-100e-4afb-8f8c-6ea281a0040e', step));
+        dispatch(getStepsData('/customer-loan-application/0edd21a6-123b-4b63-86ce-876b430c6142', step));
     }, [dispatch]);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function StepSwitcher() {
     return (
         <>
             <header className="bg-white">
-                <div className="container mx-auto max-w-[960px] p-4 md:py-6 xs:max-md:text-center">
+                <div className="container mx-auto max-w-[960px] p-4 md:p-6 xs:max-md:text-center">
                     <LogoIcon />
                 </div>
             </header>
